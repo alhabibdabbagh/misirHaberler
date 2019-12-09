@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Home Page- Misir Haberleri</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Custom styles for this template -->
+    <link href="css/modern-business.css" rel="stylesheet">
+
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+      <script type="text/javascript" src="js/angular.js"></script>
+
+  </head>
+
+  <body >
+  <div ng-app="homeApp" ng-controller="homeController">
+
+    <!-- Navigation -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">MisirHaberleri</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Anasyfa</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">Hakkımızda</a>
+            </li>
+                <li class="nav-item">
+              <a class="nav-link" href="contact.html">iletişim</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="haberler.html">Haberler</a>
+            </li>
+        
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                turizim
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+                <a class="dropdown-item" href="portfolio-1-col.html">konutlar</a>
+                <a class="dropdown-item" href="portfolio-2-col.html">yerler</a>
+                <a class="dropdown-item" href="portfolio-3-col.html">hoteler</a>
+              </div>
+            </li>
+            <span ng-if="girisliDegil">
+              <a href="giris.html" class="btn btn-success"><i class="fa fa-sign-in"></i>giris</a>
+              <a href="kayit.html" class="btn btn-info"><i class="fa fa-pencil"></i> kayıt ol</a>
+            </span>
+            <span ng-if="girisli">
+              <a  class="btn btn-danger" ng-click="cikisYap()" ><i class="fa fa-sign-out"></i>Cikis Yap</a>
+            </span>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  
+        <!-- Page Content -->
+        <div class="container">
+
+  
+  <a ng-if="girisli" class="btn btn-success" data-toggle="modal" data-target="#createModal"><i class="fa fa-plus"></i> add New Haber</a>
+          <h1 class="my-4">Haberler</h1>
+          <!-- Marketing Icons Section -->
+          <div class="row">
+            <div class="col-lg-4 mb-4" ng-repeat="haber in news">
+
+              <div class="card h-100">
+                <h4 class="card-header">{{haber.title}}</h4>
+                <div class="card-body">
+                  <p class="card-text">{{haber.about}}</p>
+                </div>
+                <div class="card-footer">
+                  <a href="#" class="btn btn-primary">devamı oku </a>
+                   <span ng-if="girisli">
+         <a href="#" class="btn btn-info"   data-toggle="modal" data-target="#editModal"   ng-click="selectHaber(haber)"><i class="fa fa-edit"></i></a>
+                  <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" ng-click="selectHaber(haber)"><i class="fa fa-trash"></i></a>
+            </span>
+                 
+                </div>
+              </div>
+            </div>
+           
+        </div>
+        <!-- /.container -->
+    </div>
+    
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+<!-- The Modal -->
+<div class="modal" id="createModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Add New Haber</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+       
+      <form class="form-group" >
+        <label for="title">Title:</label>
+        <input type="text" class="form-control" id="title" placeholder="Enter title" name="title" ng-model="addHaber.title">
+         <label for="about">about:</label>
+        <input type="text" class="form-control" id="about" placeholder="Enter about" name="about" ng-model="addHaber.about">
+         <label for="image">Title:</label>
+        <input type="text" class="form-control" id="image" placeholder="Enter image" name="image" ng-model="addHaber.image">
+         <label for="date">Title:</label>
+        <input type="date" class="form-control" id="date" placeholder="Enter date" name="date"    ng-model="addHaber.date">
+  <!-- Modal footer -->
+      <div class="modal-footer">
+          <button  ng-click="saveHaber()" data-dismiss="modal" class="fa fa-sign-in btn btn-success "> save </button>
+      </div>
+    </form>   
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- The Modal -->
+<div class="modal" id="editModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Edit Haber</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+       
+      <form class="form-group" >
+        <label for="title">Title:</label>
+        <input type="text" class="form-control" id="title" placeholder="Enter title" name="title" ng-model="clickedHaber.title">
+         <label for="about">about:</label>
+        <input type="text" class="form-control" id="about" placeholder="Enter about" name="about" ng-model="clickedHaber.about">
+         <label for="image">Title:</label>
+        <input type="text" class="form-control" id="image" placeholder="Enter image" name="image" ng-model="clickedHaber.image">
+         <label for="date">Title:</label>
+        <input type="text" class="form-control" id="date" placeholder="Enter date" name="date"    ng-model="clickedHaber.date">
+  <!-- Modal footer --> 
+      <div class="modal-footer">
+          <button  ng-click="updateHaber()" data-dismiss="modal" class="fa fa-sign-in btn btn-success "> update </button>
+      </div>
+    </form>   
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- The Modal -->
+<div class="modal" id="deleteModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Delete  Haber</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+       <p class="text-danger">are you sure <span class="text-success">{{clickedHaber.title}}</span> deleete ?</p>
+      </div>
+          <div class="modal-footer">
+          <button  ng-click="deleteHaber()" data-dismiss="modal" class="fa fa-sign-in btn btn-danger "> Delete </button>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+
+</html>

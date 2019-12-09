@@ -1,0 +1,30 @@
+ .gr_dz{
+  min-height: 550px;
+   }
+
+
+ @media screen and (max-width: 700px) {
+  .panel{
+    background-color: #951;
+
+  }
+  @media screen and (max-width: 600px) {
+  .panel{
+    background-color: #555;
+
+  }
+@media screen and (max-width: 500px) {
+  .panel{
+    background-color: #159;
+
+  }
+  
+  .btn{
+    background-color: #111;
+  }
+  .btn:hover{
+    font-size: 25px
+;
+
+  }
+ 
