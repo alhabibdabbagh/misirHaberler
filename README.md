@@ -1,2 +1,2 @@
 # MisirHaberlerWeb
- HaberSayifası
+ Haber Sayfası
